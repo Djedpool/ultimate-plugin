@@ -51,11 +51,6 @@ class RealEstateACFPlugin
         flush_rewrite_rules();
     }
 
-    function uninstall() {
-        // delete CPT
-        // delete all the plugin data from the DB
-    }
-
     function custom_post_type() {
         register_post_type('real_estate', [
             'public' => true,
@@ -73,6 +68,3 @@ register_activation_hook(__FILE__, array($realEstateACFPlugin, 'activate'));
 
 // deactivation
 register_deactivation_hook(__FILE__, array($realEstateACFPlugin, 'deactivate'));
-
-// uninstall
-
