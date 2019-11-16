@@ -68,5 +68,3 @@ register_activation_hook(__FILE__, array($realEstateACFPlugin, 'activate'));
 
 // deactivation
 register_deactivation_hook(__FILE__, array($realEstateACFPlugin, 'deactivate'));
-
-//just for purpose of testing to see if evreything is working fine
