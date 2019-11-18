@@ -33,49 +33,72 @@ Copyright 2005-2015 Automattic, Inc.
 
 defined('ABSPATH') or die('Hi there! What are you doing here, you can\' access this file, you silly human?');
 
-class RealEstateACFPlugin
-{
-    function __construct() {
-        add_action('init', array($this, 'custom_post_type'));
+if (!class_exists('RealEstateACFPlugin')) {
+
+    class RealEstateACFPlugin
+    {
+        public $plugin;
+
+        public function __construct() {
+            $this->plugin = plugin_basename(__FILE__);
+        }
+
+        function register() {
+            add_action('admin_enqueue_scripts', array($this, 'enqueue'));
+            add_action('admin_menu', array($this, 'add_admin_pages'));
+
+            add_filter("plugin_action_links_$this->plugin", array($this, 'settings_link'));
+        }
+
+        public function settings_link($links) {
+            $settings_link = '<a href="admin.php?page=realestate_acf_plugin">Settings</a>';
+            array_push( $links, $settings_link);
+            return $links;
+        }
+
+        public function add_admin_pages() {
+            add_menu_page('Real Estate ACF Plugin', 'Real Estate', 'manage_options', 'realestate_acf_plugin', array($this, 'admin_index'), 'dashicons-admin-home', 110);
+        }
+
+        public function admin_index() {
+            require_once plugin_dir_path(__FILE__) . 'templates/admin.php'; 
+        }
+
+        protected function create_post_type() {
+            add_action('init', array($this, 'custom_post_type'));
+        }
+
+        function custom_post_type() {
+            register_post_type('real_estate', [
+                'public' => true,
+                'label'  => 'Real Estate'
+            ]);
+        }
+
+        function enqueue() {
+            //enqueue all our scripts
+            wp_enqueue_style('mypluginstyle', plugins_url('/assets/style.css', __FILE__));
+            wp_enqueue_script('mypluginscript', plugins_url('/assets/script.js', __FILE__));
+        }
+
+        function activate() {
+            require_once plugin_dir_path(__FILE__) . 'inc/realestate-acf-plugin-activate.php'; 
+        }
+
+        function deactivate() {
+            require_once plugin_dir_path(__FILE__) . 'inc/realestate-acf-plugin-deactivate.php'; 
+        }
+
+
     }
 
-    function register() {
-        add_action('admin_enqueue_scripts', array($this, 'enqueue'));
-    }
-
-    function activate() {
-        // generate a CPT
-        $this->custom_post_type();
-        // flush rewrite rules
-        flush_rewrite_rules();
-    }
-
-    function deactivate() {
-        // flush rewrite rules
-        flush_rewrite_rules();
-    }
-
-    function custom_post_type() {
-        register_post_type('real_estate', [
-            'public' => true,
-            'label'  => 'Real Estate'
-        ]);
-    }
-
-    function enqueue() {
-        //enqueue all our scripts
-        wp_enqueue_style('mypluginstyle', plugins_url('/assets/style.css', __FILE__));
-        wp_enqueue_script('mypluginscript', plugins_url('/assets/script.js', __FILE__));
-    }
-}
-
-if (class_exists('RealEstateACFPlugin')){
     $realEstateACFPlugin = new RealEstateACFPlugin();
     $realEstateACFPlugin->register();
+
+    // activation
+    register_activation_hook(__FILE__, array($realEstateACFPlugin, 'activate'));
+
+    // deactivation
+    register_deactivation_hook(__FILE__, array($realEstateACFPlugin, 'deactivate'));
+
 }
-
-// activation
-register_activation_hook(__FILE__, array($realEstateACFPlugin, 'activate'));
-
-// deactivation
-register_deactivation_hook(__FILE__, array($realEstateACFPlugin, 'deactivate'));
