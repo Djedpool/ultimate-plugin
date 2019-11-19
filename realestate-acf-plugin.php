@@ -31,36 +31,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Copyright 2005-2015 Automattic, Inc.
 */
 
+// If this file is called firectly, abort!!!
 defined('ABSPATH') or die('Hi there! What are you doing here, you can\' access this file, you silly human?');
 
+// Require once the Composer Autoload
 if (file_exists(dirname(__FILE__). '/vendor/autoload.php')) {
     require_once dirname(__FILE__). '/vendor/autoload.php';
 }
-
-define('PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('PLUGIN_URL', plugin_dir_url(__FILE__));
-define( 'PLUGIN', plugin_basename( __FILE__ ) );
-
-use RealEstateInc\Base\Activate;
-use RealEstateInc\Base\Deactivate;
 
 /**
  * The code that runs during plugin activation
  */
 function activate_realestate_acf_plugin() {
-	Activate::activate();
+	RealEstateInc\Base\Activate::activate();
 }
+register_activation_hook( __FILE__, 'activate_realestate_acf_plugin' );
 
 /**
  * The code that runs during plugin deactivation
  */
 function deactivate_realestate_acf_pluginn() {
-	Deactivate::deactivate();
+	RealEstateInc\Base\Deactivate::deactivate();
 }
-
-register_activation_hook( __FILE__, 'activate_realestate_acf_plugin' );
 register_deactivation_hook( __FILE__, 'deactivate_realestate_acf_plugin' );
 
+/**
+ * Initialize all the core classes of the plugin
+ */
 if (class_exists('RealEstateInc\\Init')) {
     RealEstateInc\Init::register_services();
 }
