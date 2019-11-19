@@ -5,8 +5,9 @@
 
 namespace RealEstateInc\Base;
 
+use \RealEstateInc\Base\BaseController;
 
-class Enqueue 
+class Enqueue extends BaseController
 {
     public function register() {
         add_action('admin_enqueue_scripts', array($this, 'enqueue'));
@@ -14,7 +15,7 @@ class Enqueue
 
     public function enqueue() {
         //enqueue all our scripts
-        wp_enqueue_style('mypluginstyle', PLUGIN_URL . 'assets/style.css');
-        wp_enqueue_script('mypluginscript', PLUGIN_URL . 'assets/script.js');
+        wp_enqueue_style('mypluginstyle', $this->plugin_url . 'assets/style.css');
+        wp_enqueue_script('mypluginscript', $this->plugin_url . 'assets/script.js');
     }
 }
