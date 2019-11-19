@@ -2,7 +2,8 @@
 /**
  * @package RealEstateACFPlugin
  */
-namespace RealEstateInc;
+
+namespace RealEstateInc\Base;
 
 class Activate 
 {
