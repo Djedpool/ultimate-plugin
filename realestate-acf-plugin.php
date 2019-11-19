@@ -33,6 +33,14 @@ Copyright 2005-2015 Automattic, Inc.
 
 defined('ABSPATH') or die('Hi there! What are you doing here, you can\' access this file, you silly human?');
 
+if (file_exists(dirname(__FILE__). '/vendor/autoload.php')) {
+    require_once dirname(__FILE__). '/vendor/autoload.php';
+}
+
+use RealEstateInc\Activate;
+use RealEstateInc\Deactivate;
+use RealEstateInc\Admin\AdminPages;
+
 if (!class_exists('RealEstateACFPlugin')) {
 
     class RealEstateACFPlugin
@@ -82,11 +90,13 @@ if (!class_exists('RealEstateACFPlugin')) {
         }
 
         function activate() {
-            require_once plugin_dir_path(__FILE__) . 'inc/realestate-acf-plugin-activate.php'; 
+            // require_once plugin_dir_path(__FILE__) . 'inc/realestate-acf-plugin-activate.php'; 
+            Activate::activate();
         }
 
         function deactivate() {
-            require_once plugin_dir_path(__FILE__) . 'inc/realestate-acf-plugin-deactivate.php'; 
+            // require_once plugin_dir_path(__FILE__) . 'inc/realestate-acf-plugin-deactivate.php'; 
+            Deactivate::deactivate();
         }
 
 

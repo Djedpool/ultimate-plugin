@@ -1,0 +1,19 @@
+{
+    "name": "aaa/realestate-acf-plugin",
+    "description": "Plugin for test my skills and abilities",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Oljacic",
+            "email": "oljacici@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "RealEstateInc\\": "./inc"
+        }
+    }
+}
