@@ -6,18 +6,29 @@
 namespace RealEstateInc\Pages;
 
 use \RealEstateInc\Base\BaseController;
+use \RealEstateInc\Api\SettingsApi;
 
 class Admin extends BaseController
 {
+    public $settings;
+    public $pages = array();
+
+    public function __construct() {
+        $this->settings = new SettingsApi();
+        $this->pages = array (
+            array (
+                'page_title' => 'Real Estate ACF Plugin', 
+                'menu_titile'=> 'Real Estate', 
+                'capability' => 'manage_options', 
+                'menu_slug'  => 'realestate_acf_plugin', 
+                'callback'   => function() { echo '<h1>RealEstate</h1>';}, 
+                'icon_url'   => 'dashicons-admin-home',
+                'position'   => 110
+            )
+       );
+    }
+
     public function register() {
-        add_action('admin_menu', array($this, 'add_admin_pages'));
-    }
-
-    public function add_admin_pages() {
-        add_menu_page('Real Estate ACF Plugin', 'Real Estate', 'manage_options', 'realestate_acf_plugin', array($this, 'admin_index'), 'dashicons-admin-home', 110);
-    }
-
-    public function admin_index() {
-        require_once $this->plugin_path . 'templates/admin.php'; 
+        $this->settings->addPages($this->pages)->withSubPage('Dashboard')->register();
     }
 }
