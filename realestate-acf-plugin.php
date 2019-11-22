@@ -43,7 +43,7 @@ if (file_exists(dirname(__FILE__). '/vendor/autoload.php')) {
  * The code that runs during plugin activation
  */
 function activate_realestate_acf_plugin() {
-	RealEstateInc\Base\Activate::activate();
+    RealEstateInc\Base\Activate::activate();
 }
 register_activation_hook( __FILE__, 'activate_realestate_acf_plugin' );
 

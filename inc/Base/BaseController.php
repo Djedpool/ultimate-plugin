@@ -5,8 +5,6 @@
 
 namespace RealEstateInc\Base;
 
-use \RealEstateInc\Base\BaseController;
-
 class BaseController
 {
     public $plugin_path;

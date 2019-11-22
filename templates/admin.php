@@ -1,1 +1,1 @@
-<h1>Real Estate Plugin</h1>
+<h1>Dashboard</h1>
