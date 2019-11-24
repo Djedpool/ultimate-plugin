@@ -1,11 +1,9 @@
 <?php
 /**
- * @package RealEstateACFPlugin
+ * @package UltimatePlugin
  */
 
-namespace RealEstateInc\Base;
-
-use \RealEstateInc\Base\BaseController;
+namespace Inc\Base;
 
 class Enqueue extends BaseController
 {

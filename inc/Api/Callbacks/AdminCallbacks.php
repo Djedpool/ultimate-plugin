@@ -1,11 +1,11 @@
 <?php
 /**
- * @package RealEstateACFPlugin
+ * @package UltimatePlugin
  */
 
-namespace RealEstateInc\Api\Callbacks;
+namespace Inc\Api\Callbacks;
 
-use RealEstateInc\Base\BaseController;
+use Inc\Base\BaseController;
 
 class AdminCallbacks extends BaseController 
 {

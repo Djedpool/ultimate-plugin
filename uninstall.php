@@ -3,7 +3,7 @@
 /**
  * Trigger this file on Plugin uninstall
  *
- * @package  RealEstateACFPlugin
+ * @package  UltimatePlugin
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {

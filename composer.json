@@ -1,5 +1,5 @@
 {
-    "name": "aaa/realestate-acf-plugin",
+    "name": "stef/ultimate-plugin",
     "description": "Plugin for test my skills and abilities",
     "type": "project",
     "license": "GPL",
@@ -13,7 +13,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "RealEstateInc\\": "./inc"
+            "Inc\\": "./inc"
         }
     }
 }

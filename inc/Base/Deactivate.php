@@ -1,9 +1,9 @@
 <?php
 /**
- * @package RealEstateACFPlugin
+ * @package UltimatePlugin
  */
 
-namespace RealEstateInc\Base;
+namespace Inc\Base;
 
 class Deactivate
 {
