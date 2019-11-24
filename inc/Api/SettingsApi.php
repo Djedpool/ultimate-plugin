@@ -1,9 +1,9 @@
 <?php
 /**
- * @package RealEstateACFPlugin
+ * @package UltimatePlugin
  */
 
-namespace RealEstateInc\Api;
+namespace Inc\Api;
 
 class SettingsApi
 {

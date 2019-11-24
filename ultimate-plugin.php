@@ -1,16 +1,16 @@
 <?php
 /**
- * @package RealEstateACFPlugin
+ * @package UltimatePlugin
  */
 
 /*
-Plugin Name: RealEstate ACF Plugin
-Plugin URI: https://github.com/Oljacic/realestate-acf-plugin
-Description: This plugin is for testing my skills and ability to nail a job!
+Plugin Name: UltimatePlugin
+Plugin URI: https://github.com/Oljacic/ultimate-plugin
+Description: This is Ultimate plugin with many functionality!
 Version: 1.0.0
 Author: Stefan "Stef" Oljacic
 License: GPLv2 or latter
-Text Domain: realestate-acf-plugin
+Text Domain: ultimate-plugin
  */
 
 /*
@@ -42,22 +42,22 @@ if (file_exists(dirname(__FILE__). '/vendor/autoload.php')) {
 /**
  * The code that runs during plugin activation
  */
-function activate_realestate_acf_plugin() {
-    RealEstateInc\Base\Activate::activate();
+function activate_ultimate_plugin() {
+    Inc\Base\Activate::activate();
 }
-register_activation_hook( __FILE__, 'activate_realestate_acf_plugin' );
+register_activation_hook( __FILE__, 'activate_ultimate_plugin' );
 
 /**
  * The code that runs during plugin deactivation
  */
-function deactivate_realestate_acf_pluginn() {
-	RealEstateInc\Base\Deactivate::deactivate();
+function deactivate_ultimate_plugin() {
+	Inc\Base\Deactivate::deactivate();
 }
-register_deactivation_hook( __FILE__, 'deactivate_realestate_acf_plugin' );
+register_deactivation_hook( __FILE__, 'deactivate_ultimate_plugin' );
 
 /**
  * Initialize all the core classes of the plugin
  */
-if (class_exists('RealEstateInc\\Init')) {
-    RealEstateInc\Init::register_services();
+if (class_exists('Inc\\Init')) {
+    Inc\Init::register_services();
 }

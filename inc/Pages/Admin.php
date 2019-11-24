@@ -1,13 +1,13 @@
 <?php
 /**
- * @package RealEstateACFPlugin
+ * @package UltimatePlugin
  */
 
-namespace RealEstateInc\Pages;
+namespace Inc\Pages;
 
-use \RealEstateInc\Base\BaseController;
-use \RealEstateInc\Api\SettingsApi;
-use \RealEstateInc\Api\Callbacks\AdminCallbacks;
+use \Inc\Base\BaseController;
+use \Inc\Api\SettingsApi;
+use \Inc\Api\Callbacks\AdminCallbacks;
 
 class Admin extends BaseController
 {
@@ -31,10 +31,10 @@ class Admin extends BaseController
 	public function setPages() {
         $this->pages = array(
             array(
-                'page_title' => 'Real Estate ACF Plugin',
-                'menu_title' => 'Real Estate',
+                'page_title' => 'Ultimate Plugin',
+                'menu_title' => 'Ultimate Plugin',
                 'capability' => 'manage_options',
-                'menu_slug'  => 'realestate_acf_plugin',
+                'menu_slug'  => 'ultimate_plugin',
                 'callback'   => array($this->callback, 'adminDashboard'),
                 'icon_url'   => 'dashicons-admin-home',
                 'position'   => 110
@@ -46,27 +46,27 @@ class Admin extends BaseController
     {
         $this->subpages = array(
             array(
-                'parent_slug' => 'realestate_acf_plugin',
+                'parent_slug' => 'ultimate_plugin',
                 'page_title'  => 'Custom Post Types',
                 'menu_title'  => 'CPT',
                 'capability'  => 'manage_options',
-                'menu_slug'   => 'realestate_acf_plugin_cpt',
+                'menu_slug'   => 'ultimate_plugin_cpt',
                 'callback'    => array($this->callback, 'adminCpt'),
             ),
             array(
-                'parent_slug' => 'realestate_acf_plugin',
+                'parent_slug' => 'ultimate_plugin',
                 'page_title'  => 'Custom Taxonomies',
                 'menu_title'  => 'Taxonomies',
                 'capability'  => 'manage_options',
-                'menu_slug'   => 'realestate_acf_plugin_taxonomies',
+                'menu_slug'   => 'ultimate_plugin_taxonomies',
                 'callback'    => array($this->callback, 'adminTaxonomy'),
             ),
             array(
-                'parent_slug' => 'realestate_acf_plugin',
+                'parent_slug' => 'ultimate_plugin',
                 'page_title'  => 'Custom Widgets',
                 'menu_title'  => 'Widgets',
                 'capability'  => 'manage_options',
-                'menu_slug'   => 'realestate_acf_plugin_widgets',
+                'menu_slug'   => 'ultimate_plugin_widgets',
                 'callback'    => array($this->callback, 'adminWidget'),
             )
         );

@@ -1,9 +1,9 @@
 <?php 
 /**
- * @package RealEstateACFPlugin
+ * @package UltimatePlugin
  */
 
-namespace RealEstateInc;
+namespace Inc;
 
 final class Init
 {
@@ -20,7 +20,7 @@ final class Init
    } 
 
    /**
-    *  Loop trought the classes, initialize them,  
+    *  Loop trough the classes, initialize them,
     *  and call the register() method if it exists
     *  @return
     */
