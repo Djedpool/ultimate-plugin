@@ -24,6 +24,9 @@ class Admin extends BaseController
 
         $this->setPages();
         $this->setSubPages();
+        $this->storeSettings();
+        $this->storeSections();
+        $this->storeFields();
 
         $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
 	}
@@ -70,5 +73,49 @@ class Admin extends BaseController
                 'callback'    => array($this->callback, 'adminWidget'),
             )
         );
+    }
+
+    // This are classical setters but I use store
+    public function storeSettings() {
+        $args = array(
+            array(
+                'option_group' => 'ultimate_options_group',
+                'option_name'  => 'text_example',
+                'callback'     => array($this->callback, 'ultimateOptionsGroup')
+            )
+        );
+
+        $this->settings->setSettings($args);
+    }
+
+    public function storeSections() {
+        $args = array(
+            array(
+                'id'       => 'ultimate_admin_index',
+                'title'    => 'Settings',
+                'callback' => array($this->callback, 'ultimateAdminSection'),
+                'page'     => 'ultimate_plugin'
+            )
+        );
+
+        $this->settings->setSections($args);
+    }
+
+    public function storeFields() {
+        $args = array(
+            array(
+                'id'       => 'text_example',
+                'title'    => 'Text Example',
+                'callback' => array($this->callback, 'ultimateTextExample'),
+                'page'     => 'ultimate_plugin',
+                'section'  => 'ultimate_admin_index',
+                'args'     => array(
+                    'label_for' => 'text_example',
+                    'class'     => 'example-class'
+                )
+            )
+        );
+
+        $this->settings->setFields($args);
     }
 }
