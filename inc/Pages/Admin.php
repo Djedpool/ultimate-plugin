@@ -24,6 +24,7 @@ class Admin extends BaseController
 
         $this->setPages();
         $this->setSubPages();
+
         $this->storeSettings();
         $this->storeSections();
         $this->storeFields();
@@ -82,6 +83,10 @@ class Admin extends BaseController
                 'option_group' => 'ultimate_options_group',
                 'option_name'  => 'text_example',
                 'callback'     => array($this->callback, 'ultimateOptionsGroup')
+            ),
+            array(
+                'option_group' => 'ultimate_options_group',
+                'option_name'  => 'first_name',
             )
         );
 
@@ -111,6 +116,17 @@ class Admin extends BaseController
                 'section'  => 'ultimate_admin_index',
                 'args'     => array(
                     'label_for' => 'text_example',
+                    'class'     => 'example-class'
+                )
+            ),
+            array(
+                'id'       => 'first_name',
+                'title'    => 'First Name',
+                'callback' => array($this->callback, 'ultimateFirstName'),
+                'page'     => 'ultimate_plugin',
+                'section'  => 'ultimate_admin_index',
+                'args'     => array(
+                    'label_for' => 'first_name',
                     'class'     => 'example-class'
                 )
             )
