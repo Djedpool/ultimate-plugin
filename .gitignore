@@ -1,3 +1,4 @@
 #exclude vendor from project
 /vendor/*
 /.idea/*
+/node_modules/

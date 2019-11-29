@@ -26,13 +26,13 @@ class AdminCallbacks extends BaseController
 	}
 
 	// Templates with input, this i great way we can validate input here
-	public  function  ultimateOptionsGroup($input) {
-        return $input;
-    }
-
-    public  function  ultimateAdminSection() {
-        echo 'Check this beautiful section!';
-    }
+//	public  function  ultimateOptionsGroup($input) {
+//        return $input;
+//    }
+//
+//    public  function  ultimateAdminSection() {
+//        echo 'Check this beautiful section!';
+//    }
 
     public  function  ultimateTextExample() {
 	    $value =  esc_attr(get_option('text_example'));
