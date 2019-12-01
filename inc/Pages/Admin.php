@@ -81,53 +81,16 @@ class Admin extends BaseController
 
     // This are classical setters but I use store
     public function storeSettings() {
-        $args = array(
-            array(
+
+        $args = array();
+
+        foreach ($this->managers as $key => $val) {
+            $args[] = array(
                 'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'cpt_manager',
+                'option_name'  => $key,
                 'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'taxonomy_manager',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'media_widget',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'gallery_manager',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'testimonial_manager',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'template_manager',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'login_manager',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'membership_manager',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            ),
-            array(
-                'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => 'chat_manager',
-                'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            )
-        );
+            );
+        }
 
         $this->settings->setSettings($args);
     }
@@ -146,107 +109,22 @@ class Admin extends BaseController
     }
 
     public function storeFields() {
-        $args = array(
-            array(
-                'id'       => 'cpt_manager',
-                'title'    => 'Activate CPT Manager',
+
+        $args = array();
+
+        foreach ($this->managers as $key => $val) {
+            $args[] = array(
+                'id'       => $key,
+                'title'    => $val,
                 'callback' => array($this->callback_mngr, 'checkboxField'),
                 'page'     => 'ultimate_plugin',
                 'section'  => 'ultimate_admin_index',
                 'args'     => array(
-                    'label_for' => 'cpt_manager', //always must to match ID
+                    'label_for' => $key, //always must to match ID
                     'class'     => 'ui-toggle'
                 )
-            ),
-            array(
-                'id'       => 'taxonomy_manager',
-                'title'    => 'Activate Taxonomy Manager',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'taxonomy_manager', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-            array(
-                'id'       => 'media_widget',
-                'title'    => 'Activate Media Widget',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'media_widget', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-            array(
-                'id'       => 'gallery_manager',
-                'title'    => 'Activate Gallery Manager',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'gallery_manager', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-            array(
-                'id'       => 'testimonial_manager',
-                'title'    => 'Activate Testimonial Manager',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'testimonial_manager', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-            array(
-                'id'       => 'template_manager',
-                'title'    => 'Activate Template Manager',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'template_manager', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-            array(
-                'id'       => 'login_manager',
-                'title'    => 'Activate Login Manager',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'login_manager', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-            array(
-                'id'       => 'membership_manager',
-                'title'    => 'Activate Membership Manager',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'membership_manager', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-            array(
-                'id'       => 'chat_manager',
-                'title'    => 'Activate Chat Manager',
-                'callback' => array($this->callback_mngr, 'checkboxField'),
-                'page'     => 'ultimate_plugin',
-                'section'  => 'ultimate_admin_index',
-                'args'     => array(
-                    'label_for' => 'chat_manager', //always must to match ID
-                    'class'     => 'ui-toggle'
-                )
-            ),
-        );
+            );
+        }
 
         $this->settings->setFields($args);
     }
