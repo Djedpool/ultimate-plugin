@@ -82,15 +82,13 @@ class Admin extends BaseController
     // This are classical setters but I use store
     public function storeSettings() {
 
-        $args = array();
-
-        foreach ($this->managers as $key => $val) {
-            $args[] = array(
+        $args = array(
+            array(
                 'option_group' => 'ultimate_plugin_settings',
-                'option_name'  => $key,
+                'option_name'  => 'ultimate_plugin',
                 'callback'     => array($this->callback_mngr, 'checkboxSanitize')
-            );
-        }
+            )
+        );
 
         $this->settings->setSettings($args);
     }
@@ -120,6 +118,7 @@ class Admin extends BaseController
                 'page'     => 'ultimate_plugin',
                 'section'  => 'ultimate_admin_index',
                 'args'     => array(
+                    'option_name' => 'ultimate_plugin',
                     'label_for' => $key, //always must to match ID
                     'class'     => 'ui-toggle'
                 )
