@@ -16,7 +16,6 @@ class Dashboard extends BaseController
     public $callback;
     public $callback_mngr;
 	public $pages = array();
-//    public $subpages = array();
 
 
 	public function register() {
@@ -26,7 +25,6 @@ class Dashboard extends BaseController
         $this->callback_mngr = new ManagerCallbacks();
 
         $this->setPages();
-//        $this->setSubPages();
 
         $this->storeSettings();
         $this->storeSections();
@@ -48,36 +46,6 @@ class Dashboard extends BaseController
             )
         );
     }
-
-//    public function setSubPages()
-//    {
-//        $this->subpages = array(
-//            array(
-//                'parent_slug' => 'ultimate_plugin',
-//                'page_title'  => 'Custom Post Types',
-//                'menu_title'  => 'CPT',
-//                'capability'  => 'manage_options',
-//                'menu_slug'   => 'ultimate_plugin_cpt',
-//                'callback'    => array($this->callback, 'adminCpt'),
-//            ),
-//            array(
-//                'parent_slug' => 'ultimate_plugin',
-//                'page_title'  => 'Custom Taxonomies',
-//                'menu_title'  => 'Taxonomies',
-//                'capability'  => 'manage_options',
-//                'menu_slug'   => 'ultimate_plugin_taxonomies',
-//                'callback'    => array($this->callback, 'adminTaxonomy'),
-//            ),
-//            array(
-//                'parent_slug' => 'ultimate_plugin',
-//                'page_title'  => 'Custom Widgets',
-//                'menu_title'  => 'Widgets',
-//                'capability'  => 'manage_options',
-//                'menu_slug'   => 'ultimate_plugin_widgets',
-//                'callback'    => array($this->callback, 'adminWidget'),
-//            )
-//        );
-//    }
 
     // This are classical setters but I use store
     public function storeSettings() {
