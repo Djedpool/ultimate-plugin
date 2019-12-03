@@ -24,8 +24,6 @@ class CustomPostTypeController extends BaseController
 
     public function register() {
 
-
-
         if(!$this->activated('cpt_manager')) return;
 
         $this->settings = new SettingsApi();

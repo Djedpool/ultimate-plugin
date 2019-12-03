@@ -11,16 +11,14 @@ namespace Inc\Base;
 use Inc\Api\Callbacks\AdminCallbacks;
 use Inc\Api\SettingsApi;
 
-class TaxonomyController extends BaseController {
+class CustomTaxonomyController extends BaseController {
     public $settings;
     public $callback;
     public $subpages = array();
 
     public function register() {
-        $checkbox = get_option('ultimate_plugin');
-        $activated = isset($checkbox['taxonomy_manager']) ? $checkbox['taxonomy_manager'] : false;
 
-        if(!$activated) return;
+        if(!$this->activated('taxonomy_manager')) return;
 
         $this->settings = new SettingsApi();
         $this->callback = new AdminCallbacks();

@@ -17,7 +17,7 @@ final class Init
             Base\Enqueue::class,
             Base\SettingsLinks::class,
             Base\CustomPostTypeController::class,
-            Base\TaxonomyController::class,
+            Base\CustomTaxonomyController::class,
             Base\WidgetController::class,
         ];
    } 

@@ -18,10 +18,8 @@ class WidgetController extends BaseController {
     public $subpages = array();
 
     public function register() {
-        $checkbox = get_option('ultimate_plugin');
-        $activated = isset($checkbox['media_widget']) ? $checkbox['media_widget'] : false;
 
-        if(!$activated) return;
+        if(!$this->activated('media_widget')) return;
 
         $this->settings = new SettingsApi();
         $this->callback = new AdminCallbacks();
