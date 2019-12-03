@@ -24,10 +24,9 @@ class CustomPostTypeController extends BaseController
 
     public function register() {
 
-        $checkbox = get_option('ultimate_plugin');
-        $activated = isset($checkbox['cpt_manager']) ? $checkbox['cpt_manager'] : false;
 
-        if(!$activated) return;
+
+        if(!$this->activated('cpt_manager')) return;
 
         $this->settings = new SettingsApi();
         $this->callback = new AdminCallbacks();

@@ -30,6 +30,10 @@ class BaseController
         );
     }
 
+    public function activated(string $key) {
+        $option = get_option('ultimate_plugin');
 
+        return isset($option[$key]) ? $option[$key] : false;
+    }
 
 }
