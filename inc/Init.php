@@ -24,6 +24,7 @@ final class Init
             Base\TemplateController::class,
             Base\LoginController::class,
             Base\MembershipController::class,
+            Base\ChatController::class,
         ];
    } 
 
