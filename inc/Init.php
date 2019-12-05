@@ -21,6 +21,7 @@ final class Init
             Base\WidgetController::class,
             Base\GalleryController::class,
             Base\TestimonialController::class,
+            Base\TemplateController::class,
         ];
    } 
 
