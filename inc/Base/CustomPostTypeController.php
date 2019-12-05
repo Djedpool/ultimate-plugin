@@ -21,6 +21,7 @@ class CustomPostTypeController extends BaseController
     public $settings;
     public $callback;
     public $subpages = array();
+    public $custom_post_types = array();
 
     public function register() {
 
@@ -33,21 +34,11 @@ class CustomPostTypeController extends BaseController
 
         $this->settings->addSubPages($this->subpages)->register();
 
-        add_action('init', array($this, 'activate'));
+        $this->storeCustomPostTypes();
 
-    }
-
-    public function activate() {
-        register_post_type('ultimate_products',
-            array(
-                'labels' => array(
-                    'name' => 'Products',
-                    'singular_name' => 'Product'
-                ),
-                'public' => true,
-                'has_archive' => true,
-            )
-        );
+        if(!empty($this->custom_post_types)) {
+            add_action('init', array($this, 'registerCustomPostType'));
+        }
     }
 
     public function setSubPages()
@@ -62,5 +53,39 @@ class CustomPostTypeController extends BaseController
                 'callback'    => array($this->callback, 'adminCpt'),
             )
         );
+    }
+
+    public function storeCustomPostTypes() {
+        $this->custom_post_types = array(
+            array(
+                'post_type'     => 'ultimate_product',
+                'name'          => 'Products',
+                'singular_name' => 'Product',
+                'public'        => true,
+                'has_archive'   => true
+            ),
+            array(
+                'post_type'     => 'ultimate_games',
+                'name'          => 'Games',
+                'singular_name' => 'Game',
+                'public'        => true,
+                'has_archive'   => true
+            ),
+        );
+    }
+
+    public function registerCustomPostType() {
+        foreach ($this->custom_post_types as $post_type) {
+            register_post_type($post_type['post_type'],
+                array(
+                    'labels' => array(
+                        'name' => $post_type['name'],
+                        'singular_name' => $post_type['singular_name']
+                    ),
+                    'public' => $post_type['public'],
+                    'has_archive' => $post_type['has_archive']
+                )
+            );
+        }
     }
 }
