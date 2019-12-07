@@ -16,7 +16,14 @@ class CptCallbacks
 
     public function cptSanitize($input) {
 
+
         $output = get_option('ultimate_plugin_cpt');
+
+        if (count($output) == 0) {
+            $output[$input['post_type']] = $input;
+            return $output;
+        }
+
         foreach ($output as $key => $value) {
             if ($input['post_type'] === $key) {
                 $output[$key] = $input;
@@ -32,7 +39,7 @@ class CptCallbacks
         $name = $args['label_for'];
         $option_name = $args['option_name'];
 
-        echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="" placeholder="' . $args['placeholder'] . '">';
+        echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="" placeholder="' . $args['placeholder'] . '" required="required">';
     }
 
     public function checkboxField($args){
