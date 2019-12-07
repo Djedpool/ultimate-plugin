@@ -13,7 +13,7 @@
 
             <h3>Manage Your Custom Post Types</h3>
 
-            <?php $options = get_option('ultimate_plugin_cpt'); ?>
+            <?php $options = get_option('ultimate_plugin_cpt') ?: array(); ?>
 
             <table class="cpt-table">
                 <tr>
@@ -25,12 +25,16 @@
                     <th class="text-center">Actions</th>
                 </tr>
                 <?php  foreach($options as $option): ?>
+                    <?php
+                        $public = isset($option['public']) ? 'TRUE' : 'FALSE';
+                        $has_archive = isset($option['has_archive']) ? 'TRUE' : 'FALSE';
+                    ?>
                 <tr>
                     <td><?php echo $option['post_type']; ?></td>
                     <td><?php echo $option['singular_name']; ?></td>
                     <td><?php echo $option['plural_name']; ?></td>
-                    <td class="text-center"><?php echo $option['public']; ?></td>
-                    <td class="text-center"><?php echo $option['has_archive']; ?></td>
+                    <td class="text-center"><?php echo $public; ?></td>
+                    <td class="text-center"><?php echo $has_archive; ?></td>
                     <td class="text-center"><a href="#">EDIT</a> - <a href="#">DELETE</a></td>
                 </tr>
                 <?php endforeach; ?>

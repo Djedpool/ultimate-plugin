@@ -19,8 +19,8 @@ class Activate
 //        update_option('ultimate_plugin', $default);
         $default = array();
 
-        if ( ! get_option( 'ultimate_plugin_cpt' ) ) {
-            update_option( 'ultimate_plugin_cpt', $default );
+        if (!get_option('ultimate_plugin_cpt')) {
+            update_option('ultimate_plugin_cpt', $default);
         }
 
     }
