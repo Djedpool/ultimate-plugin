@@ -48,13 +48,16 @@ class CptCallbacks
         $name = $args['label_for'];
         $option_name = $args['option_name'];
         $value = '';
+        $readonly = '';
 
         if(isset($_POST["edit_post"])) {
             $input = get_option($option_name);
             $value = $input[strtolower(str_replace(' ', '',$_POST['edit_post']))][$name];
+
+            $readonly = ($name === 'post_type') ? 'readonly' : '';
         }
 
-        echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="'. $value .'" placeholder="' . $args['placeholder'] . '" required="required">';
+        echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="'. $value .'" placeholder="' . $args['placeholder'] . '" required="required" ' . $readonly .'>';
     }
 
     public function checkboxField($args){

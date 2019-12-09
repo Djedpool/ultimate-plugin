@@ -56,5 +56,8 @@
   "browserify-shim": {
     "jquery": "$"
   },
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "code-prettify": "^0.1.0"
+  }
 }
