@@ -35,7 +35,16 @@
                     <td><?php echo $option['plural_name']; ?></td>
                     <td class="text-center"><?php echo $public; ?></td>
                     <td class="text-center"><?php echo $has_archive; ?></td>
-                    <td class="text-center"><a href="#">EDIT</a> - <a href="#">DELETE</a></td>
+                    <td class="text-center">
+                        <a href="#">EDIT</a>
+                        <form method="post" action="options.php" class="inline-block">
+                            <?php settings_fields( 'ultimate_plugin_cpt_settings' ); ?>
+                                <input type="hidden" name="remove" value="<?php echo $option['post_type']; ?>">
+                            <?php submit_button('Delete', 'delete small', 'submit', false, array(
+                                    'onClick' => 'return confirm("Are you sure you want to delete this Custom Post Type? The data associated  with it will not be deleted");'
+                            )); ?>
+                        </form>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </table>
