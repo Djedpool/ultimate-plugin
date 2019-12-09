@@ -16,22 +16,31 @@ class CptCallbacks
 
     public function cptSanitize($input) {
 
+        $post_type = strtolower(str_replace(' ', '', $input['post_type']));
 
         $output = get_option('ultimate_plugin_cpt');
 
+        if(isset($_POST['remove'])) {
+
+            $delete = strtolower(str_replace(' ', '', $_POST['remove']));
+            unset($output[$delete]);
+
+            return $output;
+        }
+
+
         if (count($output) == 0) {
-            $output[$input['post_type']] = $input;
+            $output[$post_type] = $input;
             return $output;
         }
 
         foreach ($output as $key => $value) {
-            if ($input['post_type'] === $key) {
+            if ($post_type === $key) {
                 $output[$key] = $input;
             } else {
-                $output[$input['post_type']] = $input;
+                $output[$post_type] = $input;
             }
         }
-
         return $output;
     }
 
