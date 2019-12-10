@@ -2,23 +2,23 @@
 /**
  * Created by PhpStorm.
  * User: Stef
- * Date: 12/5/2019
- * Time: 11:42 AM
+ * Date: 12/10/2019
+ * Time: 18:34 PM
  */
 
 namespace Inc\Api\Callbacks;
 
-class CptCallbacks
+class TaxonomyCallbacks
 {
-    public function cptSectionManager(){
-        echo 'Create as many Custom Post Types as you want.';
+    public function taxSectionManager(){
+        echo 'Create as many Taxonomies as you want.';
     }
 
-    public function cptSanitize($input) {
+    public function taxSanitize($input) {
 
-        $post_type = strtolower(str_replace(' ', '', $input['post_type']));
+        $taxonomy = strtolower(str_replace(' ', '', $input['taxonomy']));
 
-        $output = get_option('ultimate_plugin_cpt');
+        $output = get_option('ultimate_plugin_tax');
 
         if(isset($_POST['remove'])) {
 
@@ -30,15 +30,15 @@ class CptCallbacks
 
 
         if (count($output) == 0) {
-            $output[$post_type] = $input;
+            $output[$taxonomy] = $input;
             return $output;
         }
 
         foreach ($output as $key => $value) {
-            if ($post_type === $key) {
+            if ($taxonomy === $key) {
                 $output[$key] = $input;
             } else {
-                $output[$post_type] = $input;
+                $output[$taxonomy] = $input;
             }
         }
         return $output;
@@ -51,9 +51,9 @@ class CptCallbacks
         $value = '';
         $readonly = '';
 
-        if(isset($_POST["edit_post"])) {
+        if(isset($_POST["edit_tax"])) {
             $input = get_option($option_name);
-            $value = $input[strtolower(str_replace(' ', '',$_POST['edit_post']))][$name];
+            $value = $input[strtolower(str_replace(' ', '',$_POST['edit_tax']))][$name];
 
             $readonly = ($name === 'post_type') ? 'readonly' : '';
         }
@@ -68,8 +68,8 @@ class CptCallbacks
         $option_name = $args['option_name'];
         $checked = false;
 
-        if (isset($_POST["edit_post"])) {
-            $post_type_name = strtolower(str_replace(' ', '', $_POST["edit_post"]));
+        if (isset($_POST["edit_tax"])) {
+            $post_type_name = strtolower(str_replace(' ', '', $_POST["edit_tax"]));
             $checkbox = get_option($option_name);
             $checked = isset($checkbox[$post_type_name][$name])?: false;
         }
