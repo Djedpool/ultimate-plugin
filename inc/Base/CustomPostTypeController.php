@@ -100,7 +100,8 @@ class CustomPostTypeController extends BaseController
                 'args'     => array(
                     'option_name' => 'ultimate_plugin_cpt',
                     'label_for'   => 'post_type', //always must to match ID
-                    'placeholder' => 'eg. product'
+                    'placeholder' => 'eg. product',
+                    'array'       => 'post_type'
                 )
             ),
             array(
@@ -112,7 +113,8 @@ class CustomPostTypeController extends BaseController
                 'args'     => array(
                     'option_name' => 'ultimate_plugin_cpt',
                     'label_for'   => 'singular_name', //always must to match ID
-                    'placeholder' => 'eg. Product'
+                    'placeholder' => 'eg. Product',
+                    'array'       => 'post_type'
                 )
             ),
             array(
@@ -124,7 +126,8 @@ class CustomPostTypeController extends BaseController
                 'args'     => array(
                     'option_name' => 'ultimate_plugin_cpt',
                     'label_for'   => 'plural_name',
-                    'placeholder' => 'eg. Products'
+                    'placeholder' => 'eg. Products',
+                    'array'       => 'post_type'
                 )
             ),
             array(
@@ -136,7 +139,8 @@ class CustomPostTypeController extends BaseController
                 'args'     => array(
                     'option_name' => 'ultimate_plugin_cpt',
                     'label_for'   => 'public',
-                    'class'       => 'ui-toggle'
+                    'class'       => 'ui-toggle',
+                    'array'       => 'post_type'
                 )
             ),
             array(
@@ -148,7 +152,8 @@ class CustomPostTypeController extends BaseController
                 'args'     => array(
                     'option_name' => 'ultimate_plugin_cpt',
                     'label_for'   => 'has_archive',
-                    'class'       => 'ui-toggle'
+                    'class'       => 'ui-toggle',
+                    'array'       => 'post_type'
                 )
             )
         );
