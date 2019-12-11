@@ -17,45 +17,39 @@
 
             <h3>Manage Your Taxonomies</h3>
 
-<!--            --><?php //$options = get_option('ultimate_plugin_cpt') ?: array(); ?>
+            <?php $options = get_option('ultimate_plugin_tax') ?: array(); ?>
 
-<!--            <table class="cpt-table">-->
-<!--                <tr>-->
-<!--                    <th>ID</th>-->
-<!--                    <th>Singular Name</th>-->
-<!--                    <th>Plural Name</th>-->
-<!--                    <th class="text-center">Public</th>-->
-<!--                    <th class="text-center">Archive</th>-->
-<!--                    <th class="text-center">Actions</th>-->
-<!--                </tr>-->
-<!--                --><?php //foreach($options as $option): ?>
-<!--                    --><?php
-//                    $public = isset($option['public']) ? 'TRUE' : 'FALSE';
-//                    $has_archive = isset($option['has_archive']) ? 'TRUE' : 'FALSE';
-//                    ?>
-<!--                    <tr>-->
-<!--                        <td>--><?php //echo $option['post_type']; ?><!--</td>-->
-<!--                        <td>--><?php //echo $option['singular_name']; ?><!--</td>-->
-<!--                        <td>--><?php //echo $option['plural_name']; ?><!--</td>-->
-<!--                        <td class="text-center">--><?php //echo $public; ?><!--</td>-->
-<!--                        <td class="text-center">--><?php //echo $has_archive; ?><!--</td>-->
-<!--                        <td class="text-center">-->
-<!--                            <form method="post" action="" class="inline-block">-->
-<!--                                <input type="hidden" name="edit_tax" value="--><?php //echo $option['post_type']; ?><!--">-->
-<!--                                --><?php //submit_button('Edit', 'primary small', 'submit', false); ?>
-<!--                            </form>-->
-<!---->
-<!--                            <form method="post" action="options.php" class="inline-block">-->
-<!--                                --><?php //settings_fields( 'ultimate_plugin_cpt_settings' ); ?>
-<!--                                <input type="hidden" name="remove" value="--><?php //echo $option['post_type']; ?><!--">-->
-<!--                                --><?php //submit_button('Delete', 'delete small', 'submit', false, array(
-//                                    'onClick' => 'return confirm("Are you sure you want to delete this Custom Post Type? The data associated  with it will not be deleted");'
-//                                )); ?>
-<!--                            </form>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                --><?php //endforeach; ?>
-<!--            </table>-->
+            <table class="cpt-table">
+                <tr>
+                    <th>ID</th>
+                    <th>Singular Name</th>
+                    <th class="text-center">Hierarchical</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                <?php foreach($options as $option): ?>
+                    <?php
+                        $hierarchical = isset($option['hierarchical']) ? 'TRUE' : 'FALSE';
+                    ?>
+                    <tr>
+                        <td><?php echo $option['taxonomy']; ?></td>
+                        <td><?php echo $option['singular_name']; ?></td>
+                        <td class="text-center"><?php echo $hierarchical; ?></td>
+                        <td class="text-center">
+                            <form method="post" action="" class="inline-block">
+                                <input type="hidden" name="edit_tax" value="<?php echo $option['taxonomy']; ?>">
+                                <?php submit_button('Edit', 'primary small', 'submit', false); ?>
+                            </form>
+                            <form method="post" action="options.php" class="inline-block">
+                                <?php settings_fields( 'ultimate_plugin_tax_settings' ); ?>
+                                <input type="hidden" name="remove" value="<?php echo $option['taxonomy']; ?>">
+                                <?php submit_button('Delete', 'delete small', 'submit', false, array(
+                                    'onClick' => 'return confirm("Are you sure you want to delete this Custom Taxonomy? The data associated with it will not be deleted");'
+                                )); ?>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
 
         </div>
 

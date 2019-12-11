@@ -28,7 +28,6 @@ class TaxonomyCallbacks
             return $output;
         }
 
-
         if (count($output) == 0) {
             $output[$taxonomy] = $input;
             return $output;
@@ -55,7 +54,7 @@ class TaxonomyCallbacks
             $input = get_option($option_name);
             $value = $input[strtolower(str_replace(' ', '',$_POST['edit_tax']))][$name];
 
-            $readonly = ($name === 'post_type') ? 'readonly' : '';
+            $readonly = ($name === 'taxonomy') ? 'readonly' : '';
         }
 
         echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="'. $value .'" placeholder="' . $args['placeholder'] . '" required="required" ' . $readonly .'>';
