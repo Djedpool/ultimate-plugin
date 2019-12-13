@@ -60,31 +60,36 @@ class TestimonialController extends BaseController
 
     public function renderFeaturesBox($post) {
 
-        wp_nonce_field('ultimate_testimonial_author', 'ultimate_testimonial_author_nonce');
-        $value = get_post_meta($post->ID, '_ultimate_testimonial_author_key', true);
+        wp_nonce_field('ultimate_testimonial', 'ultimate_testimonial_nonce');
+
+        $data = get_post_meta( $post->ID, '_ultimate_testimonial_key', true );
+        $name = isset($data['name']) ? $data['name'] : '';
+        $email = isset($data['email']) ? $data['email'] : '';
+        $approved = isset($data['approved']) ? $data['approved'] : false;
+        $featured = isset($data['featured']) ? $data['featured'] : false;
 
         ?>
         <p>
             <label for="ultimate_testimonial_author">Testimonial Author</label>
-            <input type="text" id="ultimate_testimonial_author" name="ultimate_testimonial_author" value="<?php echo esc_attr($value)?>">
+            <input type="text" id="ultimate_testimonial_author" name="ultimate_testimonial_author" value="<?php echo esc_attr($name); ?>">
         </p>
         <p>
-            <label class="meta-label" for="alecaddd_testimonial_email">Author Email</label>
-            <input type="email" id="alecaddd_testimonial_email" name="alecaddd_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
+            <label class="meta-label" for="ultimate_testimonial_email">Author Email</label>
+            <input type="email" id="ultimate_testimonial_email" name="ultimate_testimonial_email" class="widefat" value="<?php echo esc_attr( $email ); ?>">
         </p>
         <div class="meta-container">
-            <label class="meta-label w-50 text-left" for="alecaddd_testimonial_approved">Approved</label>
+            <label class="meta-label w-50 text-left" for="ultimate_testimonial_approved">Approved</label>
             <div class="text-right w-50 inline">
-                <div class="ui-toggle inline"><input type="checkbox" id="alecaddd_testimonial_approved" name="alecaddd_testimonial_approved" value="1" <?php echo $approved ? 'checked' : ''; ?>>
-                    <label for="alecaddd_testimonial_approved"><div></div></label>
+                <div class="ui-toggle inline"><input type="checkbox" id="ultimate_testimonial_approved" name="ultimate_testimonial_approved" value="1" <?php echo $approved ? 'checked' : ''; ?>>
+                    <label for="ultimate_testimonial_approved"><div></div></label>
                 </div>
             </div>
         </div>
         <div class="meta-container">
-            <label class="meta-label w-50 text-left" for="alecaddd_testimonial_featured">Featured</label>
+            <label class="meta-label w-50 text-left" for="ultimate_testimonial_featured">Featured</label>
             <div class="text-right w-50 inline">
-                <div class="ui-toggle inline"><input type="checkbox" id="alecaddd_testimonial_featured" name="alecaddd_testimonial_featured" value="1" <?php echo $featured ? 'checked' : ''; ?>>
-                    <label for="alecaddd_testimonial_featured"><div></div></label>
+                <div class="ui-toggle inline"><input type="checkbox" id="ultimate_testimonial_featured" name="ultimate_testimonial_featured" value="1" <?php echo $featured ? 'checked' : ''; ?>>
+                    <label for="ultimate_testimonial_featured"><div></div></label>
                 </div>
             </div>
         </div>
@@ -93,26 +98,33 @@ class TestimonialController extends BaseController
     }
 
     public function saveMetaBox($post_id) {
-        if(!isset($_POST['ultimate_testimonial_author_nonce'])) {
+
+        if (!isset($_POST['ultimate_testimonial_nonce'])) {
             return $post_id;
         }
 
-        $nonce = $_POST['ultimate_testimonial_author_nonce'];
+        $nonce = $_POST['ultimate_testimonial_nonce'];
 
-        if(!wp_verify_nonce($nonce, 'ultimate_testimonial_author')) {
+        if (!wp_verify_nonce( $nonce, 'ultimate_testimonial')) {
             return $post_id;
         }
 
-        if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return $post_id;
         }
 
-        if(!current_user_can('edit_post', $post_id)) {
+        if (!current_user_can('edit_post', $post_id )) {
             return $post_id;
         }
 
-        $data = sanitize_text_field($_POST['ultimate_testimonial_author']);
-        update_post_meta($post_id, '_ultimate_testimonial_author_key', $data);
+        $data = array(
+            'name' => sanitize_text_field($_POST['ultimate_testimonial_author']),
+            'email' => sanitize_text_field($_POST['ultimate_testimonial_email']),
+            'approved' => isset($_POST['ultimate_testimonial_approved']) ? 1 : 0,
+            'featured' => isset($_POST['ultimate_testimonial_featured']) ? 1 : 0,
+        );
+
+        update_post_meta( $post_id, '_ultimate_testimonial_key', $data );
     }
 
 }
