@@ -14,36 +14,29 @@ use Inc\Api\SettingsApi;
 
 class TestimonialController extends BaseController
 {
-    public $settings;
-    public $callback;
-    public $subpages = array();
-
     public function register() {
         if(!$this->activated('testimonial_manager')) return;
 
-        $this->settings = new SettingsApi();
-        $this->callback = new AdminCallbacks();
-
-        $this->setSubPages();
-
-        $this->settings->addSubPages($this->subpages)->register();
+        add_action('init', array($this, 'testimonialCpt'));
     }
 
-    public function activate() {
-        // setting testimonials
-    }
+    public function testimonialCpt() {
 
-
-    public function setSubPages() {
-        $this->subpages = array(
-            array(
-                'parent_slug' => 'ultimate_plugin',
-                'page_title'  => 'Testimonials',
-                'menu_title'  => 'Testimonials Manager',
-                'capability'  => 'manage_options',
-                'menu_slug'   => 'ultimate_plugin_testimonials',
-                'callback'    => array($this->callback, 'adminWidget'),
-            )
+        $labels = array(
+            'name' => 'Testimonials',
+            'singular_name' => 'Testimonials'
         );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => true,
+            'has_archive' => false,
+            'menu_icon' => 'dashicons-testimonial',
+            'exclude_from_search' => true,
+            'publicly_queryable' => false,
+            'supports' => array('title', 'editor')
+        );
+
+        register_post_type('testimonial', $args);
     }
 }
