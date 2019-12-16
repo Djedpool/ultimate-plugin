@@ -10,7 +10,6 @@ namespace Inc\Base;
 
 
 use Inc\Api\SettingsApi;
-use Inc\Api\Callbacks\AdminCallbacks;
 use Inc\Api\Callbacks\TestimonialCallbacks;
 
 class TestimonialController extends BaseController
@@ -40,8 +39,9 @@ class TestimonialController extends BaseController
 
     public function testimonialForm() {
         ob_start();
+        echo '<link href="'.$this->plugin_url.'/assets/form.css"></link>';
         require_once("$this->plugin_path/templates/contact-form.php");
-        echo '<script src="'.$this->plugin_url.'/src/js/form.js"></script>';
+        echo '<script src="'.$this->plugin_url.'assets/form.js"></script>';
         return ob_get_clean();
 
     }
