@@ -30,9 +30,20 @@ class TestimonialController extends BaseController
         add_action('save_post', array($this, 'saveMetaBox'));
         add_action('manage_testimonial_posts_columns', array($this, 'setCustomColumns'));
         add_action('manage_testimonial_posts_custom_column', array($this, 'setCustomColumnsData'), 10, 2);
+
         add_filter('manage_edit-testimonial_sortable_columns', array($this, 'setCustomColumnsSortable'), 10, 2);
 
         $this->setShortcodePage();
+
+        add_shortcode('testimonial-form', array($this, 'testimonialForm'));
+    }
+
+    public function testimonialForm() {
+        ob_start();
+        require_once("$this->plugin_path/templates/contact-form.php");
+        echo '<script src="'.$this->plugin_url.'/src/js/form.js"></script>';
+        return ob_get_clean();
+
     }
 
     public function setShortcodePage() {
