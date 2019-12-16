@@ -21,6 +21,9 @@ class TestimonialController extends BaseController
         add_action('init', array($this, 'testimonialCpt'));
         add_action('add_meta_boxes', array($this, 'addMetaBoxes'));
         add_action('save_post', array($this, 'saveMetaBox'));
+        add_action('manage_testimonial_posts_columns', array($this, 'setCustomColumns'));
+        add_action('manage_testimonial_posts_custom_column', array($this, 'setCustomColumnsData'), 10, 2);
+        add_filter('manage_edit-testimonial_sortable_columns', array($this, 'setCustomColumnsSortable'), 10, 2);
 
     }
 
@@ -127,4 +130,46 @@ class TestimonialController extends BaseController
         update_post_meta( $post_id, '_ultimate_testimonial_key', $data );
     }
 
+    public function setCustomColumns($columns) {
+
+        $title = $columns['title'];
+        $date = $columns['date'];
+        unset($columns['title'], $columns['date']);
+
+        $columns['name'] = 'Author Name';
+        $columns['title'] = $title;
+        $columns['approved'] = 'Approved';
+        $columns['featured'] = 'Featured';
+        $columns['date'] = $date;
+
+        return $columns;
+    }
+
+    public function setCustomColumnsData($column, $post_id) {
+        $data = get_post_meta( $post_id, '_ultimate_testimonial_key', true );
+        $name = isset($data['name']) ? $data['name'] : '';
+        $email = isset($data['email']) ? $data['email'] : '';
+        $approved = isset($data['approved']) && $data['approved'] == 1 ? '<strong>YES</strong>' : 'NO';
+        $featured = isset($data['featured']) && $data['featured'] == 1 ? '<strong>YES</strong>' : 'NO';
+
+        switch($column) {
+            case 'name':
+                echo '<strong>'.$name.'</strong></br><a href="malito:"'.$email.'">'.$email.'</a>';
+                break;
+            case 'approved':
+                echo $approved;
+                break;
+            case 'featured':
+                echo $featured;
+                break;
+        }
+    }
+
+    public function setCustomColumnsSortable($columns) {
+        $columns['name'] = 'name';
+        $columns['approved'] = 'approved';
+        $columns['featured'] = 'featured';
+
+        return $columns;
+    }
 }
