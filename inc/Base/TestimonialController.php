@@ -40,11 +40,46 @@ class TestimonialController extends BaseController
     }
 
     public function submitTestimonial() {
-        // sanitize the data
-        // store the data into testimonial CPT
-        // send response
 
-        echo 'Yes i GOT you!';
+        $name = sanitize_text_field($_POST['name']);
+        $email = sanitize_email($_POST['email']);
+        $message = sanitize_textarea_field($_POST['message']);
+
+        $data = array(
+            'name' => $name,
+            'email' => $email,
+            'approved' => 0,
+            'featured' => 0
+        );
+
+        $args = array(
+            'post_title' => 'Testimonial from '.$name,
+            'post_content' => $message,
+            'post_author' => 1,
+            'post_status' => 'publish',
+            'post_type' => 'testimonial',
+            'meta_input' => array(
+                '_ultimate_testimonial_key' => $data
+            )
+        );
+
+        $postID = wp_insert_post($args);
+
+        if($postID) {
+            $return = array(
+                'status' => 'success',
+                'ID' => $postID
+            );
+            wp_send_json($return);
+            wp_die();
+        }
+
+        $return = array(
+            'status' => 'error'
+        );
+
+        wp_send_json($return);
+
         wp_die();
     }
 
@@ -167,7 +202,7 @@ class TestimonialController extends BaseController
 
         $data = array(
             'name' => sanitize_text_field($_POST['ultimate_testimonial_author']),
-            'email' => sanitize_text_field($_POST['ultimate_testimonial_email']),
+            'email' => sanitize_email($_POST['ultimate_testimonial_email']),
             'approved' => isset($_POST['ultimate_testimonial_approved']) ? 1 : 0,
             'featured' => isset($_POST['ultimate_testimonial_featured']) ? 1 : 0,
         );
