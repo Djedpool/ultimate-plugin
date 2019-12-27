@@ -32,14 +32,16 @@ var projectURL   = 'https://test.dev';
 
 
 var styleSRC     = './src/scss/style.scss';
-var styleFront     = './src/scss/form.scss';
+var styleForm    = './src/scss/form.scss';
+var styleSlider  = './src/scss/slider.scss';
 var styleURL     = './assets/';
 var mapURL       = './';
 
 var jsSRC        = './src/js/';
 var jsAdmin      = 'script.js';
-var jsFront      = 'form.js';
-var jsFiles      = [jsAdmin, jsFront];
+var jsForm       = 'form.js';
+var jsSlider     = 'slider.js';
+var jsFiles      = [jsAdmin, jsForm, jsSlider];
 var jsURL        = './assets/';
 
 var styleWatch   = './src/scss/**/*.scss';
@@ -48,7 +50,7 @@ var phpWatch     = './**/*.php';
 
 
 gulp.task( 'styles', function() {
-    gulp.src( [styleSRC, styleFront] )
+    gulp.src( [styleSRC, styleForm, styleSlider] )
         .pipe( sourcemaps.init() )
         .pipe( sass({
             errLogToConsole: true,
@@ -68,7 +70,7 @@ gulp.task( 'js', function() {
         })
         .transform( babelify, { presets: [ 'env' ] } )
         .bundle()
-        .pipe( source(entry))
+        .pipe( source(entry) )
         .pipe( buffer() )
         .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
         .pipe( sourcemaps.init({ loadMaps: true }) )
