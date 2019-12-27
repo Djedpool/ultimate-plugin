@@ -41,6 +41,10 @@ class TestimonialController extends BaseController
 
     public function submitTestimonial() {
 
+        if(!DOING_AJAX || !check_ajax_referer('testimonial-nonce', 'nonce', false)) {
+            $this->returnJson('error');
+        }
+
         $name = sanitize_text_field($_POST['name']);
         $email = sanitize_email($_POST['email']);
         $message = sanitize_textarea_field($_POST['message']);
@@ -66,18 +70,17 @@ class TestimonialController extends BaseController
         $postID = wp_insert_post($args);
 
         if($postID) {
-            $return = array(
-                'status' => 'success',
-                'ID' => $postID
-            );
-            wp_send_json($return);
-            wp_die();
+            $this->returnJson('success');
         }
 
-        $return = array(
-            'status' => 'error'
-        );
+        $this->returnJson('error');
 
+    }
+
+    public function returnJson($status) {
+        $return = array(
+            'status' => $status
+        );
         wp_send_json($return);
 
         wp_die();
