@@ -35,6 +35,17 @@ class TestimonialController extends BaseController
         $this->setShortcodePage();
 
         add_shortcode('testimonial-form', array($this, 'testimonialForm'));
+        add_action('wp_ajax_submit_testimonial', array($this, 'submitTestimonial'));
+        add_action('wp_ajax_nopriv_submit_testimonial', array($this, 'submitTestimonial'));
+    }
+
+    public function submitTestimonial() {
+        // sanitize the data
+        // store the data into testimonial CPT
+        // send response
+
+        echo 'Yes i GOT you!';
+        wp_die();
     }
 
     public function testimonialForm() {

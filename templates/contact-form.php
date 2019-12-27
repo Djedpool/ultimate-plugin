@@ -24,4 +24,6 @@
         <small class="field-msg error js-form-error">There was a problem with the Contact Form, please try again!</small>
     </div>
 
+    <input type="hidden" name="action" value="submit_testimonial">
+
 </form>
