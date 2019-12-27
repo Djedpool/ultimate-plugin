@@ -1,0 +1,31 @@
+#ultimate-testimonial-form {
+
+  .field-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .field-msg {
+    display: none;
+    position: absolute;
+    left: 2px;
+    bottom: -14px;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  .error {
+    color: #901313;
+  }
+
+  .success {
+    color: #2f812f;
+  }
+
+}
