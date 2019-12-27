@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
         let data = {
             name: testimonialForm.querySelector('[name="name"]').value,
             email: testimonialForm.querySelector('[name="email"]').value,
-            message: testimonialForm.querySelector('[name="message"]').value
+            message: testimonialForm.querySelector('[name="message"]').value,
+            nonce: testimonialForm.querySelector('[name="nonce"]').value
         }
 
         // validate everything
@@ -52,12 +53,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
             testimonialForm.querySelector('.js-form-success').classList.add('show');
 
-            testimonialForm.querySelector('[name="name"]').value = '';
-
-            testimonialForm.querySelector('[name="email"]').value = '';
-
-            testimonialForm.querySelector('[name="message"]').value = '';
-
+            testimonialForm.reset();
         })
     })
 });
