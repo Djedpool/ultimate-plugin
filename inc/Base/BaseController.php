@@ -23,7 +23,7 @@ class BaseController
             'media_widget' => 'Activate Widget Manager',
             'gallery_manager' => 'Activate Gallery Manager',
             'testimonial_manager' => 'Activate Testimonials Manager',
-            'template_manager' => 'Activate Template Manager',
+            'template_manager' => 'Activate Custom Templates',
             'login_manager' => 'Activate Ajax Login/Signup',
             'membership_manager' => 'Activate Membership Manager',
             'chat_manager' => 'Activate Chat Manager'

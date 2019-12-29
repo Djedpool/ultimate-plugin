@@ -8,40 +8,46 @@
 
 namespace Inc\Base;
 
-use Inc\Api\Callbacks\AdminCallbacks;
-use Inc\Api\SettingsApi;
 
 class TemplateController extends BaseController
 {
-    public $settings;
-    public $callback;
-    public $subpages = array();
+    public $templates;
 
     public function register() {
         if(!$this->activated('template_manager')) return;
 
-        $this->settings = new SettingsApi();
-        $this->callback = new AdminCallbacks();
-
-        $this->setSubPages();
-
-        $this->settings->addSubPages($this->subpages)->register();
-    }
-
-    public function activate() {
-        // probably not needed but just in case if something cross my mind
-    }
-
-    public function setSubPages() {
-        $this->subpages = array(
-            array(
-                'parent_slug' => 'ultimate_plugin',
-                'page_title'  => 'Template',
-                'menu_title'  => 'Template Manager',
-                'capability'  => 'manage_options',
-                'menu_slug'   => 'ultimate_plugin_template',
-                'callback'    => array($this->callback, 'adminWidget')
-            )
+        $this->templates = array(
+            'page-templates/two-columns-tpl.php' => 'Two Columns Layout'
         );
+
+        add_filter('theme_page_templates', array($this, 'customTemplate'));
+        add_filter('template_include', array($this, 'loadTemplate'));
+    }
+
+    public function customTemplate($templates) {
+        $templates = array_merge($templates, $this->templates);
+        return $templates;
+    }
+
+    public function loadTemplate($template) {
+        global $post;
+
+        if(!$post) {
+            return $template;
+        }
+
+        $template_name = get_post_meta($post->ID, '_wp_page_template', true);
+
+        if(!isset($this->templates[$template_name])) {
+            return $template;
+        }
+
+        $file = $this->plugin_path . $template_name;
+
+        if(file_exists($file)) {
+            return $file;
+        }
+
+        return $template;
     }
 }
