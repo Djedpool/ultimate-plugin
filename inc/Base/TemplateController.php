@@ -36,6 +36,15 @@ class TemplateController extends BaseController
             return $template;
         }
 
+        // If is the front page,  load a custom template
+        if(is_front_page()) {
+            $file = $this->plugin_path . 'page-templates/front-page.php';
+
+            if(file_exists($file)) {
+                return $file;
+            }
+        }
+
         $template_name = get_post_meta($post->ID, '_wp_page_template', true);
 
         if(!isset($this->templates[$template_name])) {
