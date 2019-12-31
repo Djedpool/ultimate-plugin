@@ -133,7 +133,8 @@ class TestimonialController extends BaseController
             'menu_icon' => 'dashicons-testimonial',
             'exclude_from_search' => true,
             'publicly_queryable' => false,
-            'supports' => array('title', 'editor')
+            'supports' => array('title', 'editor'),
+            'show_in_rest' => true
         );
 
         register_post_type('testimonial', $args);
