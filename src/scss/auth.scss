@@ -26,6 +26,7 @@
     background: #fff;
     padding: 10px;
     border-radius: 4px;
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.35);
 
     &.show {
       transform: translateX(0);
@@ -67,6 +68,22 @@
       text-transform: uppercase;
       display: inline-block;
       margin: 0 4px;
+    }
+  }
+
+  .status {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &.error {
+      color: rgb(144, 19, 19);
+    }
+
+    &.success {
+      color: rgb(47, 129, 47);
     }
   }
 }
